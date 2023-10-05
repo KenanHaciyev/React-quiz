@@ -1,9 +1,17 @@
 import React from 'react';
 import './App.css';
+import {Col, Row} from "antd";
+import Game from "./Components/Game";
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div>Hello world!!</div>
+    <div>
+        <Row  justify='center' align='middle' style={{height: '100vh'}} >
+            <Col>
+                <Game/>
+            </Col>
+        </Row>
+    </div>
   );
 }
 
