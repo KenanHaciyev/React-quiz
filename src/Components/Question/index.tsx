@@ -1,9 +1,12 @@
 import React from 'react';
+import styles from './question.module.css';
 
-interface IQuestionProps {
+interface IQuestionPropsTypes {
 	question: string;
 }
 
-const Question: React.FC<IQuestionProps> = ({ question }) => <div style={{width: '500px'}} >{question}</div>;
+const Question: React.FC<IQuestionPropsTypes> = ({ question }) => (
+	<div className={styles.question}>{question}</div>
+);
 
 export default Question;

@@ -2,13 +2,20 @@
 .wrapper {
     display: flex;
     flex-direction: column;
+    border: 1px solid  #80808047;
+    border-radius: 3px;
+    padding: 5px 10px 5px;
+    min-height: 300px;
+    box-shadow: 1px 1px 4px 0px rgba(0,0,0,0.68);
+    -webkit-box-shadow: 1px 1px 4px 0px rgba(0,0,0,0.68);
+    -moz-box-shadow: 1px 1px 4px 0px rgba(0,0,0,0.68);
 }
 
 .timeStep {
     height: 4px;
-    width: 1%;
+    width: 0;
     background-color: #3f7ac1;
-    animation: expandWidth 10s infinite;
+    animation: expandWidth 32s linear;
     overflow: hidden;
 }
 

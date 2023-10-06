@@ -1,26 +1,31 @@
-export let quizData: IQuizData[] | [] = [];
-const apiUrl: string = 'https://opentdb.com/api.php?amount=30&category=18&difficulty=easy&type=multiple';
+import {apiUrl} from "../constants/apiConstants";
+import {IQuizDataItem} from "../types/api";
 
-export interface IQuizData {
-	category: string;
-	correct_answer: string;
-	difficulty: string;
-	incorrect_answers: string[];
-	question: string;
-	type: string;
-}
+export let quizDataList: IQuizDataItem[] | [] = [];
 
-export const getData = async () => {
-	const data = await fetch(apiUrl);
-	const response = await data.json();
-	quizData = response.results;
-	generateOptions();
+
+
+export const fetchData = async () => {
+	try {
+		const response = await fetch(apiUrl);
+
+		if (!response.ok) {
+			throw new Error(`Error occurred with status ${response.status}`)
+		}
+
+		const res = await response.json();
+
+		quizDataList = res.results;
+		addCorrectAnswersToOptions();
+	}catch (e) {
+		console.error('Error occurred', e)
+	}
 };
 
 // in this method I add correct answer to list of non-corrects, because api gave us correct answer separately,
 // and for comfortable mapping we added correct answers to non-corrects list
-const generateOptions = () => {
-	quizData.map((quiz, i) => {
+const addCorrectAnswersToOptions = () => {
+	quizDataList.map((quiz, i) => {
 		const correctAnswer = quiz.correct_answer;
 		const incorrectAnswers = quiz.incorrect_answers;
 		incorrectAnswers.splice(
@@ -28,6 +33,6 @@ const generateOptions = () => {
 			0,
 			correctAnswer,
 		);
-		quizData[i].incorrect_answers = incorrectAnswers;
+		quizDataList[i].incorrect_answers = incorrectAnswers;
 	});
 };

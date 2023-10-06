@@ -1,39 +1,44 @@
 import React from 'react';
 import { ConfigProvider, Radio, RadioChangeEvent, Space } from 'antd';
 
+import styles from './answerOptions.module.css';
+
+import RadioButton from '../RadioButton';
+
 interface IOptions {
 	options: string[];
 	step: number;
 }
 const AnswerOptions: React.FC<IOptions> = ({ options, step }) => {
-	const logger = (e: RadioChangeEvent) => {
-		localStorage.setItem(`selectedOption${step}`, e.target.value);
+	const handleSelectedOption = (e: RadioChangeEvent) => {
+		let currentStepData = JSON.parse(localStorage.getItem(`step${step}`)!);
+		const newSelectedOption = { selectedOption: e.target.value };
+		const updatedStepData = {
+			...currentStepData,
+			...newSelectedOption,
+		};
+		localStorage.setItem(`step${step}`, JSON.stringify(updatedStepData));
 	};
 
 	return (
-		<div>
+		<div className={styles.wrapper}>
 			<ConfigProvider
 				theme={{
 					components: {
 						Radio: {
-							borderRadius: 14,
-							controlOutline: '#fff',
+							borderRadius: 6,
+							controlHeight: 40,
+							lineWidth: 2,
+							colorBgContainer: 'rgb(251 253 240 / 24%);)',
 						},
 					},
 				}}
 			>
-				<Radio.Group buttonStyle="outline" size="middle">
+				<Radio.Group buttonStyle="solid">
 					<Space direction="vertical">
 						{options?.map((option, i) => {
 							return (
-								<Radio.Button
-									key={i}
-									onChange={e => logger(e)}
-									style={{ minWidth: '500px' }}
-									value={option}
-								>
-									{option}
-								</Radio.Button>
+								<RadioButton key={i} option={option} handleSelectedOption={handleSelectedOption} />
 							);
 						})}
 					</Space>

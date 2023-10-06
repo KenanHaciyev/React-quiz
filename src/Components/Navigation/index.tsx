@@ -2,17 +2,17 @@ import React from 'react';
 import styles from './navigation.module.css';
 import ButtonComponent from '../Button';
 
-interface INavigation {
+interface INavigationPropsTypes {
 	handlePrevious: () => void;
 	handleNext: () => void;
 	step: number;
 }
 
-const Navigation: React.FC<INavigation> = ({ handlePrevious, handleNext, step }) => {
+const Navigation: React.FC<INavigationPropsTypes> = ({ handlePrevious, handleNext, step }) => {
 	return (
 		<div className={styles.navigation}>
 			{!!step && <ButtonComponent onClick={handlePrevious} text={'Previous'} />}
-			<h2>{step + 1} of 5 answers</h2>
+			<p>{step + 1} of 5 answers</p>
 			<ButtonComponent onClick={handleNext} text={'Next'} />
 		</div>
 	);
