@@ -1,0 +1,22 @@
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.timeStep {
+    height: 4px;
+    width: 1%;
+    background-color: #3f7ac1;
+    animation: expandWidth 10s infinite;
+    overflow: hidden;
+}
+
+@keyframes expandWidth {
+    0% {
+        width: 0%;
+    }
+    100% {
+        width: 100%;
+    }
+}

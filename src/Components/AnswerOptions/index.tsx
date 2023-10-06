@@ -3,15 +3,11 @@ import { ConfigProvider, Radio, RadioChangeEvent, Space } from 'antd';
 
 interface IOptions {
 	options: string[];
-	correctAnswer: string;
-	setCorrectAnswers: React.Dispatch<React.SetStateAction<number>>;
+	step: number;
 }
-const AnswerOptions: React.FC<IOptions> = ({ options, correctAnswer, setCorrectAnswers }) => {
+const AnswerOptions: React.FC<IOptions> = ({ options, step }) => {
 	const logger = (e: RadioChangeEvent) => {
-		const selectedValue = e.target.value;
-		if (selectedValue === correctAnswer) {
-			setCorrectAnswers(prev => prev + 1);
-		}
+		localStorage.setItem(`selectedOption${step}`, e.target.value);
 	};
 
 	return (
@@ -28,7 +24,7 @@ const AnswerOptions: React.FC<IOptions> = ({ options, correctAnswer, setCorrectA
 			>
 				<Radio.Group buttonStyle="outline" size="middle">
 					<Space direction="vertical">
-						{options.map((option, i) => {
+						{options?.map((option, i) => {
 							return (
 								<Radio.Button
 									key={i}
