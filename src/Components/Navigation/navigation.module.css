@@ -1,0 +1,17 @@
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+
+.navigation:before{
+    position: absolute;
+    content: '';
+    top: -5px;
+    left: -10px;
+    width: 104%;
+    height: 1px;
+    background-color: #80808038;
+}
